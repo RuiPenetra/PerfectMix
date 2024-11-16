@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54056D7B2CE84881007571D7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54056D7A2CE84881007571D7 /* APIClient.swift */; };
 		54BA175E2CE129020041CF1A /* PerfectMixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA175D2CE129020041CF1A /* PerfectMixApp.swift */; };
 		54BA17602CE129020041CF1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA175F2CE129020041CF1A /* ContentView.swift */; };
 		54BA17622CE129030041CF1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54BA17612CE129030041CF1A /* Assets.xcassets */; };
@@ -18,9 +19,15 @@
 		54BA17772CE14D4A0041CF1A /* RecipeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA17762CE14D4A0041CF1A /* RecipeViewModel.swift */; };
 		54BA17792CE167C10041CF1A /* NoRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA17782CE167C10041CF1A /* NoRecipesView.swift */; };
 		54BA177B2CE16F9E0041CF1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54BA177A2CE16F9E0041CF1A /* LaunchScreen.storyboard */; };
+		54BA177D2CE17D700041CF1A /* RecipeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA177C2CE17D700041CF1A /* RecipeTabView.swift */; };
+		54BA177F2CE17DF10041CF1A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA177E2CE17DF10041CF1A /* HomeView.swift */; };
+		54BA17812CE17E0F0041CF1A /* MyRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA17802CE17E0F0041CF1A /* MyRecipesView.swift */; };
+		54BA17832CE17E300041CF1A /* RecipesSavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA17822CE17E300041CF1A /* RecipesSavedView.swift */; };
+		54C85A462CE870570019801F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C85A452CE870570019801F /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54056D7A2CE84881007571D7 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		54BA175A2CE129020041CF1A /* PerfectMix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectMix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54BA175D2CE129020041CF1A /* PerfectMixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectMixApp.swift; sourceTree = "<group>"; };
 		54BA175F2CE129020041CF1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,6 +40,11 @@
 		54BA17762CE14D4A0041CF1A /* RecipeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewModel.swift; sourceTree = "<group>"; };
 		54BA17782CE167C10041CF1A /* NoRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRecipesView.swift; sourceTree = "<group>"; };
 		54BA177A2CE16F9E0041CF1A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		54BA177C2CE17D700041CF1A /* RecipeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTabView.swift; sourceTree = "<group>"; };
+		54BA177E2CE17DF10041CF1A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		54BA17802CE17E0F0041CF1A /* MyRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesView.swift; sourceTree = "<group>"; };
+		54BA17822CE17E300041CF1A /* RecipesSavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesSavedView.swift; sourceTree = "<group>"; };
+		54C85A452CE870570019801F /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +58,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54056D792CE84862007571D7 /* managers */ = {
+			isa = PBXGroup;
+			children = (
+				54056D7A2CE84881007571D7 /* APIClient.swift */,
+			);
+			path = managers;
+			sourceTree = "<group>";
+		};
+		544718E62CE902CF00964E3E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		54BA17512CE129020041CF1A = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +92,8 @@
 		54BA175C2CE129020041CF1A /* PerfectMix */ = {
 			isa = PBXGroup;
 			children = (
+				544718E62CE902CF00964E3E /* Utilities */,
+				54056D792CE84862007571D7 /* managers */,
 				54BA175D2CE129020041CF1A /* PerfectMixApp.swift */,
 				54BA17722CE13F8C0041CF1A /* Model */,
 				54BA17752CE14CE40041CF1A /* ViewModels */,
@@ -72,6 +101,7 @@
 				54BA175F2CE129020041CF1A /* ContentView.swift */,
 				54BA17612CE129030041CF1A /* Assets.xcassets */,
 				54BA17632CE129030041CF1A /* Preview Content */,
+				54C85A452CE870570019801F /* LoadingView.swift */,
 			);
 			path = PerfectMix;
 			sourceTree = "<group>";
@@ -92,6 +122,10 @@
 				54BA17702CE1393D0041CF1A /* NewRecipeView.swift */,
 				54BA17782CE167C10041CF1A /* NoRecipesView.swift */,
 				54BA177A2CE16F9E0041CF1A /* LaunchScreen.storyboard */,
+				54BA177C2CE17D700041CF1A /* RecipeTabView.swift */,
+				54BA177E2CE17DF10041CF1A /* HomeView.swift */,
+				54BA17802CE17E0F0041CF1A /* MyRecipesView.swift */,
+				54BA17822CE17E300041CF1A /* RecipesSavedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -128,6 +162,8 @@
 			dependencies = (
 			);
 			name = PerfectMix;
+			packageProductDependencies = (
+			);
 			productName = PerfectMix;
 			productReference = 54BA175A2CE129020041CF1A /* PerfectMix.app */;
 			productType = "com.apple.product-type.application";
@@ -156,6 +192,8 @@
 				Base,
 			);
 			mainGroup = 54BA17512CE129020041CF1A;
+			packageReferences = (
+			);
 			productRefGroup = 54BA175B2CE129020041CF1A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -184,12 +222,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				54BA176D2CE12BBD0041CF1A /* RecipeListView.swift in Sources */,
+				54BA17812CE17E0F0041CF1A /* MyRecipesView.swift in Sources */,
+				54056D7B2CE84881007571D7 /* APIClient.swift in Sources */,
 				54BA17792CE167C10041CF1A /* NoRecipesView.swift in Sources */,
 				54BA17712CE1393D0041CF1A /* NewRecipeView.swift in Sources */,
+				54C85A462CE870570019801F /* LoadingView.swift in Sources */,
+				54BA177F2CE17DF10041CF1A /* HomeView.swift in Sources */,
 				54BA176F2CE12EC90041CF1A /* RecipeListRowView.swift in Sources */,
 				54BA17772CE14D4A0041CF1A /* RecipeViewModel.swift in Sources */,
+				54BA177D2CE17D700041CF1A /* RecipeTabView.swift in Sources */,
 				54BA17602CE129020041CF1A /* ContentView.swift in Sources */,
 				54BA175E2CE129020041CF1A /* PerfectMixApp.swift in Sources */,
+				54BA17832CE17E300041CF1A /* RecipesSavedView.swift in Sources */,
 				54BA17742CE13FDD0041CF1A /* RecipeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

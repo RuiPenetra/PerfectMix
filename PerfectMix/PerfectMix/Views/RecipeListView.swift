@@ -9,36 +9,49 @@ import SwiftUI
 
 struct RecipeListView: View {
     
-    @EnvironmentObject var recipeViewModel: RecipeViewModel
-    
+    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+    @State private var hasLoaded: Bool = false
+
     var body: some View {
-        
         ZStack {
-            if recipeViewModel.recipes.isEmpty {
-                NoRecipesView()
-                    .transition(AnyTransition.opacity.animation(.easeIn))
-            }else{
-                List{
-                    ForEach(recipeViewModel.recipes){ item in
-                        RecipeListRowView(recipe: item)
-                            .onTapGesture {
-                                withAnimation(.linear){
-                                    recipeViewModel.updateItem(recipe: item)
-                                }
-                            }
-                    }
-                    .onDelete(perform: recipeViewModel.deleteItem)
-                    .onMove(perform: recipeViewModel.moveItem)
+            
+            if hasLoaded && recipeViewModel.recipes.isEmpty {
+                    NoRecipesView()
+                        .transition(AnyTransition.opacity.animation(.easeIn))
                 }
-                
+            
+            List{
+                ForEach(Array(recipeViewModel.recipes.enumerated()), id: \.element.id) { index, recipe in
+                    RecipeListRowView(recipe: recipe)
+                        .padding(.top,20)
+                        .onTapGesture {
+                            withAnimation(.linear){
+                                //recipeViewModel.updateItem(recipe: recipe)
+                            }
+                        }
+                }
+                //.onDelete(perform: recipeViewModel.deleteItem)
+                //.onMove(perform: recipeViewModel.moveItem)
             }
+            .listStyle(.plain)
+            .padding(EdgeInsets(top: 44, leading: 0, bottom: 24, trailing: 0))
+            .edgesIgnoringSafeArea(.all)
+            .task{
+                recipeViewModel.getRecipes()
+                
+                hasLoaded = true
+            }
+            
+            if !hasLoaded && recipeViewModel.isLoading {
+                LoadingView()
+            }
+            
+   
+            
         }
-        .navigationTitle("Recipes")
-        .navigationBarItems(
-            leading: EditButton(),
-            trailing:
-                NavigationLink("Add", destination: NewRecipeView())
-        )
+        .navigationTitle("My Recipes")
+
+
         
     }
     

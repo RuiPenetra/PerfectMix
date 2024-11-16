@@ -8,23 +8,48 @@
 import Foundation
 
 
-class RecipeViewModel: ObservableObject {
+@MainActor final class RecipeViewModel: ObservableObject {
     
     @Published var recipes: [RecipeModel] = []
+    @Published var showTabView = true
+    @Published var newRecipeView = false
+    @Published var isLoading = false
     
-    init(){
-        getItems()
+    
+    init(){ }
+    
+    
+    func getRecipes() {
+        isLoading = true
+        Task {
+            do {
+                recipes = try await APIClient.shared.fetchRecipes()
+                isLoading = false
+            } catch {
+                print("Erro ao carregar receitas: \(error)")
+                isLoading = false
+            }
+        }
+    }
+
+    func createRecipe(recipe: RecipeModel) {
+        //let newRecipe = RecipeModel(title: title, description: description, portion: portion, time: time, difficulty: difficulty, isCompleted: false)
+        //try await APIClient().createPost(recipe: recipe)
+        newRecipeView = false
+
+        Task {
+            do {
+                try await APIClient.shared.createRecipe(recipe: recipe)
+                //isLoading = false
+            } catch {
+                print("Erro ao carregar receitas: \(error)")
+                //isLoading = false
+            }
+        }
     }
     
-    
-    func getItems(){
-        let newRecipes = [
-            RecipeModel(title: "This 1", isCompleted: false),
-            RecipeModel(title: "This 2", isCompleted: true),
-            RecipeModel(title: "This 3", isCompleted: false),
-        ]
-        
-        recipes.append(contentsOf: newRecipes)
+    func changeStateTab(){
+        showTabView.toggle()
     }
     
     func deleteItem(indexSet: IndexSet) {
@@ -35,10 +60,7 @@ class RecipeViewModel: ObservableObject {
         recipes.move(fromOffsets: from, toOffset: to)
     }
     
-    func addItem(title: String){
-        let newRecipe = RecipeModel(title: title, isCompleted: false)
-        recipes.append(newRecipe)
-    }
+
     
     func updateItem(recipe: RecipeModel){
         //if let index = recipes.firstIndex { (existingRecipe) -> Bool in
@@ -47,7 +69,7 @@ class RecipeViewModel: ObservableObject {
             //}
         
         if let index = recipes.firstIndex(where: { $0.id == recipe.id }){
-            recipes[index] = RecipeModel(title: recipe.title, isCompleted: !recipe.isCompleted)
+            recipes[index] = RecipeModel(id: recipe.id, title: recipe.title, description: recipe.description, portion: recipe.portion, time: recipe.time, difficulty: recipe.difficulty)
         }
         
     }

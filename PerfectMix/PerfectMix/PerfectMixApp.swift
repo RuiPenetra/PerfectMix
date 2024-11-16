@@ -10,14 +10,13 @@ import SwiftUI
 @main
 struct PerfectMixApp: App {
     
-    @StateObject var recipeListViewModel: RecipeViewModel = RecipeViewModel()
-    
+    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+
     var body: some Scene {
         WindowGroup {
-            NavigationView{
-                RecipeListView()
-            }
-            .environmentObject(recipeListViewModel)
+            RecipeTabView()
+                .environmentObject(recipeViewModel)
+        
         }
     }
 }
