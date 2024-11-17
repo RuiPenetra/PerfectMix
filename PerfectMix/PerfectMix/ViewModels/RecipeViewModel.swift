@@ -11,13 +11,18 @@ import Foundation
 @MainActor final class RecipeViewModel: ObservableObject {
     
     @Published var recipes: [RecipeModel] = []
-    @Published var showTabView = true
-    @Published var newRecipeView = false
-    @Published var isLoading = false
+    @Published var showTabView: Bool = true
+    @Published var newRecipeView: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var selectedRecipe: RecipeModel?
     
     
     init(){ }
     
+    
+    func changeStateNewRecipeV(){
+        newRecipeView.toggle()
+    }
     
     func getRecipes() {
         isLoading = true
@@ -35,22 +40,28 @@ import Foundation
     func createRecipe(recipe: RecipeModel) {
         //let newRecipe = RecipeModel(title: title, description: description, portion: portion, time: time, difficulty: difficulty, isCompleted: false)
         //try await APIClient().createPost(recipe: recipe)
-        newRecipeView = false
+        
+        print("tes")
+        print(newRecipeView)
+
+        //changeStateNewRecipeV()
+        print(newRecipeView)
 
         Task {
             do {
                 try await APIClient.shared.createRecipe(recipe: recipe)
                 //isLoading = false
+
             } catch {
                 print("Erro ao carregar receitas: \(error)")
                 //isLoading = false
             }
         }
+        print("tes")
+        print(newRecipeView)
+
     }
     
-    func changeStateTab(){
-        showTabView.toggle()
-    }
     
     func deleteItem(indexSet: IndexSet) {
         recipes.remove(atOffsets: indexSet)

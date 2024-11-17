@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RecipeTabView: View {
 
+    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+
     var body: some View {
             TabView {
                 HomeView()
@@ -30,6 +32,10 @@ struct RecipeTabView: View {
                     Image(systemName: "bookmark")
                     Text("Saved")
                 }
+            }
+            .sheet(isPresented: $recipeViewModel.newRecipeView){
+                NewRecipeView()
+                    .navigationTitle("New Recipe")
             }
         
     }

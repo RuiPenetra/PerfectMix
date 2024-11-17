@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct NewRecipeView: View {
-    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+    @EnvironmentObject var recipeViewModel: RecipeViewModel
     @State private var titleTF: String = ""
     @State private var descriptionTF: String = ""
     @State private var portionTF: String = ""
@@ -16,19 +16,26 @@ struct NewRecipeView: View {
     
     // Function to show an alert
     private func getAlert() -> Alert {
-        return Alert(title: Text("Saved!"), message: Text("Your recipe has been saved."), dismissButton: .default(Text("OK")))
+        return Alert(
+            title: Text("Saved!"),
+            message: Text("Your recipe has been saved."),
+            dismissButton: .default(Text("OK")){
+                recipeViewModel.changeStateNewRecipeV()
+            })
+        
     }
     
     private func saveButtonPressed() {
         // Here you can implement the logic to save the data (e.g., store it in a database or pass it to a view model)
         print(        recipeViewModel.newRecipeView)
+        
+        
         let newRecipe = RecipeModel(id:"0",title: titleTF, description: descriptionTF, portion: 0, time: cookingTime, difficulty: difficulty)
         Task {
             recipeViewModel.createRecipe(recipe: newRecipe)
-            
+                
             showAlert = true
         }
-        print(        recipeViewModel.newRecipeView)
 
     }
     

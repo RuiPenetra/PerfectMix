@@ -9,8 +9,9 @@ import SwiftUI
 
 struct RecipeListView: View {
     
-    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+    @EnvironmentObject var recipeViewModel: RecipeViewModel
     @State private var hasLoaded: Bool = false
+    @State private var showDetails: Bool = false
 
     var body: some View {
         ZStack {
@@ -25,6 +26,8 @@ struct RecipeListView: View {
                     RecipeListRowView(recipe: recipe)
                         .padding(.top,20)
                         .onTapGesture {
+                            recipeViewModel.selectedRecipe = recipe
+                            showDetails = true
                             withAnimation(.linear){
                                 //recipeViewModel.updateItem(recipe: recipe)
                             }
@@ -40,6 +43,9 @@ struct RecipeListView: View {
                 recipeViewModel.getRecipes()
                 
                 hasLoaded = true
+            }
+            .sheet(isPresented: $showDetails){
+                RecipeDetailsView()
             }
             
             if !hasLoaded && recipeViewModel.isLoading {

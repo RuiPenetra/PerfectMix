@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		54056D7B2CE84881007571D7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54056D7A2CE84881007571D7 /* APIClient.swift */; };
+		544718E82CE95B0900964E3E /* RecipeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544718E72CE95B0900964E3E /* RecipeDetailsView.swift */; };
 		54BA175E2CE129020041CF1A /* PerfectMixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA175D2CE129020041CF1A /* PerfectMixApp.swift */; };
 		54BA17602CE129020041CF1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BA175F2CE129020041CF1A /* ContentView.swift */; };
 		54BA17622CE129030041CF1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54BA17612CE129030041CF1A /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		54056D7A2CE84881007571D7 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		544718E72CE95B0900964E3E /* RecipeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsView.swift; sourceTree = "<group>"; };
 		54BA175A2CE129020041CF1A /* PerfectMix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PerfectMix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54BA175D2CE129020041CF1A /* PerfectMixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfectMixApp.swift; sourceTree = "<group>"; };
 		54BA175F2CE129020041CF1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				54BA177E2CE17DF10041CF1A /* HomeView.swift */,
 				54BA17802CE17E0F0041CF1A /* MyRecipesView.swift */,
 				54BA17822CE17E300041CF1A /* RecipesSavedView.swift */,
+				544718E72CE95B0900964E3E /* RecipeDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				54BA175E2CE129020041CF1A /* PerfectMixApp.swift in Sources */,
 				54BA17832CE17E300041CF1A /* RecipesSavedView.swift in Sources */,
 				54BA17742CE13FDD0041CF1A /* RecipeModel.swift in Sources */,
+				544718E82CE95B0900964E3E /* RecipeDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

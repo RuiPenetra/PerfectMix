@@ -1,28 +1,30 @@
 import SwiftUI
 
 struct MyRecipesView: View {
-    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
-    
+    @EnvironmentObject var recipeViewModel: RecipeViewModel
+
     var body: some View {
         NavigationView {
             RecipeListView()
+                .sheet(isPresented: $recipeViewModel.newRecipeView){
+                    NewRecipeView()
+                }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         EditButton()
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            recipeViewModel.newRecipeView = true
+                            recipeViewModel.changeStateNewRecipeV()
+                            
+                            print(recipeViewModel.newRecipeView )
                         } label: {
                             Image(systemName: "plus")
                         }
                     }
                     
                 }
-                .sheet(isPresented: $recipeViewModel.newRecipeView){
-                    NewRecipeView()
-                        .navigationTitle("New Recipe")
-                }
+
         }
     }
     
