@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecipeListRowView: View {
+struct RecipeListOld: View {
     
     let recipe: RecipeModel
     
@@ -31,6 +31,9 @@ struct RecipeListRowView: View {
                             endPoint: .bottom)
                             .opacity(0.4)
                             .blur(radius: 3)
+                        
+                        
+                        
                     )
                 
                 VStack(alignment: .leading, spacing: 10){
@@ -92,15 +95,15 @@ struct RecipeListRowView: View {
     }
 }
 
-struct RecipeListRowView_Previews: PreviewProvider {
+struct RecipeListOld_Previews: PreviewProvider {
     
-    static var item1 = RecipeModel(id:"1", title: "First item!", description: "wwwwwwwwwww", portion:0, time:"20 min", difficulty:"Easy")
-    static var item2 = RecipeModel(id:"2", title: "Second item!", description: "wwwwwwwwwww",portion:0, time:"29 min", difficulty:"Easy")
+    static var item1 = RecipeModel(id:"1", title: "First item!", description: "wwwwwwwwwww", portion:0, time:20, difficulty:"Easy",category: "Italian")
+    static var item2 = RecipeModel(id:"2", title: "Second item!", description: "wwwwwwwwwww",portion:0, time:29, difficulty:"Easy",category: "Italian")
     
     static var previews: some View {
         Group {
-            RecipeListRowView(recipe: item1)
-            RecipeListRowView(recipe: item2)
+            RecipeListOld(recipe: item1)
+            RecipeListOld(recipe: item2)
         }
         .previewLayout(.sizeThatFits)
     }

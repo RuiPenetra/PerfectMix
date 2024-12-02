@@ -14,51 +14,12 @@ struct RecipeListView: View {
     @State private var showDetails: Bool = false
 
     var body: some View {
-        ZStack {
-            
-            if hasLoaded && recipeViewModel.recipes.isEmpty {
-                    NoRecipesView()
-                        .transition(AnyTransition.opacity.animation(.easeIn))
-                }
-            
-            List{
-                ForEach(Array(recipeViewModel.recipes.enumerated()), id: \.element.id) { index, recipe in
-                    RecipeListRowView(recipe: recipe)
-                        .padding(.top,20)
-                        .onTapGesture {
-                            recipeViewModel.selectedRecipe = recipe
-                            showDetails = true
-                            withAnimation(.linear){
-                                //recipeViewModel.updateItem(recipe: recipe)
-                            }
-                        }
-                }
-                //.onDelete(perform: recipeViewModel.deleteItem)
-                //.onMove(perform: recipeViewModel.moveItem)
-            }
-            .listStyle(.plain)
-            .padding(EdgeInsets(top: 44, leading: 0, bottom: 24, trailing: 0))
-            .edgesIgnoringSafeArea(.all)
-            .task{
-                recipeViewModel.getRecipes()
-                
-                hasLoaded = true
-            }
-            .sheet(isPresented: $showDetails){
-                RecipeDetailsView()
-            }
-            
-            if !hasLoaded && recipeViewModel.isLoading {
-                LoadingView()
-            }
-            
-   
-            
-        }
-        .navigationTitle("My Recipes")
-
-
         
+       VStack {
+           RecipeList()
+       }
+       .navigationTitle("My Recipes")
+       
     }
     
 

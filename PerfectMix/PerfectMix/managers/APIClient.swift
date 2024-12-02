@@ -13,9 +13,50 @@ class APIClient {
 
     // GET request to fetch all recipes or a specific recipe
     func fetchRecipes() async throws -> [RecipeModel] {
-        guard let url = URL(string: baseURL) else {
-            throw URLError(.badURL)
+   
+        do {
+            guard let url = URL(string: baseURL) else {
+                throw URLError(.badURL)
+            }
+            
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            // Check the status code first
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw URLError(.badServerResponse)
+            }
+            
+            guard httpResponse.statusCode == 200 else {
+                throw URLError(.badServerResponse)
+            }
+            
+            // Now proceed to decode
+            let decoder = JSONDecoder()
+            let recipes = try decoder.decode([RecipeModel].self, from: data)
+            return recipes
+        } catch {
+            print("Error: \(error.localizedDescription)")
+            throw URLError(.badServerResponse)
         }
+
+
+    }
+
+    func fetchRecipesFilter(params:String, value:String) async throws -> [RecipeModel] {
+        
+        guard var urlComponents = URLComponents(string: baseURL) else {
+            throw URLError(.badURL)
+
+        }
+        urlComponents.queryItems = [
+            URLQueryItem(name: params, value: value)
+        ]
+
+        guard let url = urlComponents.url else {
+            throw URLError(.badURL)
+
+        }
+
 
         let (data, _) = try await URLSession.shared.data(from: url)
         
@@ -29,7 +70,8 @@ class APIClient {
         }
 
     }
-
+    
+  
     // GET request to fetch a single recipe by ID
     func fetchRecipe(by id: String) async throws -> RecipeModel {
         guard let url = URL(string: "\(baseURL)/\(id)") else {
@@ -49,6 +91,7 @@ class APIClient {
     }
 
 
+    
     // Async function to send POST request
     func createRecipe(recipe: RecipeModel) async throws -> RecipeModel {
         // Step 1: Convert PostData to JSON

@@ -6,7 +6,7 @@ struct MyRecipesView: View {
     var body: some View {
         NavigationView {
             RecipeListView()
-                .sheet(isPresented: $recipeViewModel.newRecipeView){
+                .fullScreenCover(isPresented: $recipeViewModel.openEditRecipe){
                     NewRecipeView()
                 }
                 .toolbar {
@@ -15,9 +15,8 @@ struct MyRecipesView: View {
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            recipeViewModel.changeStateNewRecipeV()
+                            recipeViewModel.openEditRecipe.toggle()
                             
-                            print(recipeViewModel.newRecipeView )
                         } label: {
                             Image(systemName: "plus")
                         }
@@ -33,5 +32,7 @@ struct MyRecipesView: View {
 struct MyRecipesView_Previews: PreviewProvider {
     static var previews: some View {
         MyRecipesView()
+            .environmentObject(RecipeViewModel())  // Pass the view model
+
     }
 }

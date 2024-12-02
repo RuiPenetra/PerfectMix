@@ -97,9 +97,9 @@ struct RecipeDetailsView: View {
                             .foregroundColor(Color.accentColor)
                         
                         
-                        Text(recipeViewModel.selectedRecipe?.time ?? "1 min")
-                            .font(.system(size: 15))
-                        
+//                        Text(recipeViewModel.selectedRecipe?.time ?? .const(1))
+//                            .font(.system(size: 15))
+//
                         
                     }
                     .padding(15)

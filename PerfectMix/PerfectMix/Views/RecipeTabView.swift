@@ -21,21 +21,17 @@ struct RecipeTabView: View {
                 }
                 
                 MyRecipesView()
+                .environmentObject(recipeViewModel)
                 .tabItem{
                     Image(systemName: "book")
                     Text("My Recipes")
                 }
                 
                 RecipesSavedView()
-                    .navigationTitle("Ola")
                 .tabItem{
                     Image(systemName: "bookmark")
                     Text("Saved")
                 }
-            }
-            .sheet(isPresented: $recipeViewModel.newRecipeView){
-                NewRecipeView()
-                    .navigationTitle("New Recipe")
             }
         
     }
