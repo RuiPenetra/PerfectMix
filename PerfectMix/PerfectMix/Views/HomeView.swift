@@ -112,34 +112,28 @@ struct HomeView: View {
         }
         .padding()
         .onAppear {
+            recipeViewModel.isRecipeSaved = false
             if recipeViewModel.recipesRecommended.isEmpty {
                 Task{
                     await recipeViewModel.getRecipesRecommended()  // Load recommended recipes when view appears
                 }
             }
+
+        }
+        .onDisappear {
+            recipeViewModel.isRecipeSaved = false // Reset when view disappears
         }
         .fullScreenCover(isPresented: $showDetails) {
             RecipeDetailsView(isShowDetails: $showDetails)
         }
         .fullScreenCover(isPresented: $showCategories) {
-            NavigationView{
-                RecipeListByCategory(category: $categorySelected)  // Pass Binding<String> here
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Button(action: {
-                                showCategories = false
-                            }) {
-                                Text("Back")
-                                    .foregroundColor(Color.accentColor)
-                            }
-                        }
-                    }
-                    .navigationBarTitle("Category: \(categorySelected)")
-            }
+            RecipeListByCategory(isShowCategory: $showCategories,category: $categorySelected)  // Pass Binding<String> here
+
         }
         .toast(isPresented: $recipeViewModel.isRecipeSaved, message: recipeViewModel.message)
 
         }
+
     }
 
 

@@ -20,17 +20,22 @@ struct RecipeListView: View {
                     .onAppear {
                         recipeViewModel.getRecipes(params: "", value: "")
                     }
-                    .toast(isPresented: $recipeViewModel.isRecipeSaved, message: recipeViewModel.message)
-
+      
+            }
+            .onDisappear {
+                recipeViewModel.isRecipeSaved = false // Reset when view disappears
             }
             .navigationTitle("My Recipes")
              .fullScreenCover(isPresented: $recipeViewModel.showDetails) {
                  RecipeDetailsView(isShowDetails: $recipeViewModel.showDetails)  // Show Recipe Details on tap
              }
+             .fullScreenCover(isPresented: $recipeViewModel.openEditRecipe){
+                 NewRecipeView(recipe: RecipeModel(difficulty:"Easy" ,category:"Italian"))
+             }
              .toolbar {
                  ToolbarItem(placement: .navigationBarTrailing) {
                      Button {
-                         recipeViewModel.openEditRecipe.toggle()
+                         recipeViewModel.openEditRecipe = true
                          
                      } label: {
                          Image(systemName: "plus")
@@ -39,6 +44,7 @@ struct RecipeListView: View {
                  
              }
         }
+       //.toast(isPresented: $recipeViewModel.isRecipeSaved, message: recipeViewModel.message)
 
     }
     

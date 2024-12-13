@@ -5,15 +5,15 @@ extension View {
         isPresented: Binding<Bool>,
         message: String,
         backgroundColor: Color = .black,
-        duration: TimeInterval = 2
+        duration: TimeInterval = 0.4
     ) -> some View {
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .top) {
             self
             if isPresented.wrappedValue {
                 Toast(message: message, backgroundColor: backgroundColor)
                     .transition(.move(edge: .top))
                     .zIndex(1)  // Ensures the toast is on top
-                    .padding(.bottom, 40)  // Padding from the top of the screen
+                    .padding(.top, 40)  // Padding from the top of the screen
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
                             withAnimation{

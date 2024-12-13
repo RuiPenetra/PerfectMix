@@ -8,38 +8,43 @@
 import SwiftUI
 
 struct RecipeTabView: View {
-
-    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+    @StateObject  var recipeViewModel: RecipeViewModel = RecipeViewModel()
+    
 
     var body: some View {
+        ZStack {
             TabView {
-                
                 HomeView()
-                    .environmentObject(recipeViewModel)
-                    .tabItem{
+                    .tabItem {
                         Image(systemName: "house")
                         Text("Home")
                     }
                 
                 RecipeListView()
-                    .tabItem{
+                    .tabItem {
                         Image(systemName: "book")
                         Text("My Recipes")
                     }
-                
+
                 RecipesSavedView()
-                    .tabItem{
+                    .tabItem {
                         Image(systemName: "bookmark")
                         Text("Saved")
                     }
             }
-        
+            
+        }
+        .onChange(of: recipeViewModel.isRecipeSaved) { _ in
+            // Reset the flag whenever recipe is saved, if needed
+            recipeViewModel.isRecipeSaved = false
+        }
     }
 }
 
 struct RecipeTabView_Previews: PreviewProvider {
     static var previews: some View {
         RecipeTabView()
+            .environmentObject(RecipeViewModel())
     }
 }
 

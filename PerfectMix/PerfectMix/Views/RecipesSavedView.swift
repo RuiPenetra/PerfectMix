@@ -28,7 +28,7 @@ struct RecipesSavedView: View {
                             .padding(.top,20)
                             .onTapGesture {
                                 recipeViewModel.selectedRecipe = recipe
-                                recipeViewModel.showDetails = true
+                                showDetails = true
                                 withAnimation(.linear){
                                     //recipeViewModel.updateItem(recipe: recipe)
                                 }
@@ -41,15 +41,15 @@ struct RecipesSavedView: View {
                 .fullScreenCover(isPresented: $showDetails){
                     RecipeDetailsView(isShowDetails: $showDetails)
                 }
-                .toast(isPresented: $recipeViewModel.isRecipeSaved, message: recipeViewModel.message)
 
 
             }
             .navigationTitle("Saved")
+
     
         }
-        
-        
+        //.toast(isPresented: $recipeViewModel.isRecipeSaved, message: recipeViewModel.message)
+
         
     }
 }

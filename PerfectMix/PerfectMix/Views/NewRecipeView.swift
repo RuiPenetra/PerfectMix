@@ -49,19 +49,25 @@ struct NewRecipeView: View {
                 .font(.title3.bold())
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .leading) {
-                    Button {
-                        recipeViewModel.openEditRecipe.toggle()
-    
-                    } label: {
+                    Button(action: {
+                        recipeViewModel.openEditRecipe = false
+                    }) {
                         Image(systemName: "arrow.left")
-                            .font(.title3)
+                            .font(.system(size: 13))
                             .foregroundColor(.black)
                     }
+                    .frame(width: 35, height: 35)
+                    .background(Circle().fill(Color.white))
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 4)
+                    .scaleEffect(recipeViewModel.openEditRecipe ? 1.1 : 1)
+                    .animation(.easeInOut(duration: 0.2), value: recipeViewModel.openEditRecipe)
+                    .padding(.bottom,10)
+            
                 }
 
             VStack(alignment: .leading, spacing: 12) {
                 Text("Title")
-                    .font(.caption)
+                    .font(.system(size: 16))
                     .foregroundColor(.gray)
                 
                 TextField("", text: $recipe.title)
@@ -74,7 +80,7 @@ struct NewRecipeView: View {
 
             VStack(alignment: .leading, spacing: 12) {
                 Text("Description")
-                    .font(.caption)
+                    .font(.system(size: 16))
                     .foregroundColor(.gray)
 
                 TextEditor(text: $recipe.description)
@@ -92,7 +98,8 @@ struct NewRecipeView: View {
                             .font(.system(size: 15))
                         
                         Text("Portion")
-                            .font(.caption)
+                            .font(.system(size: 16))
+
                     }
                     .foregroundColor(.gray)
 
@@ -116,7 +123,7 @@ struct NewRecipeView: View {
                             .font(.system(size: 15))
                         
                         Text("Cooking Time")
-                            .font(.caption)
+                            .font(.system(size: 16))
                     }
                     .foregroundColor(.gray)
 
@@ -145,7 +152,7 @@ struct NewRecipeView: View {
                         .font(.system(size: 15))
                     
                     Text("Difficulty")
-                        .font(.caption)
+                        .font(.system(size: 16))
                 }
                 .foregroundColor(.gray)
 
@@ -171,7 +178,7 @@ struct NewRecipeView: View {
                         .font(.system(size: 15))
                     
                     Text("Category")
-                        .font(.caption)
+                        .font(.system(size: 16))
                 }
                 .foregroundColor(.gray)
 
@@ -181,6 +188,7 @@ struct NewRecipeView: View {
                             Text(category)
                                 .font(.callout)
                                 .padding(.vertical, 8)
+                                .padding(.horizontal, 10)
                                 .frame(minWidth: 100)
                                 .multilineTextAlignment(.center)
                                 .foregroundColor(recipe.category == category ? .white : .black)

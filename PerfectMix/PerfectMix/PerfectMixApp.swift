@@ -10,13 +10,12 @@ import SwiftUI
 @main
 struct PerfectMixApp: App {
     
-    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+    @StateObject var recipeViewModel = RecipeViewModel()
 
     var body: some Scene {
         WindowGroup {
             RecipeTabView()
-                .environmentObject(recipeViewModel)
-        
+                .environmentObject(recipeViewModel)  // Provide environment object to child views
         }
     }
 }

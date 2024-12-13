@@ -9,8 +9,6 @@ class APIClient {
         
     private init() {}
 
-
-
     // GET request to fetch all recipes or a specific recipe
     func fetchRecipes() async throws -> [RecipeModel] {
    
@@ -102,11 +100,10 @@ class APIClient {
     
     // Async function to send POST request
     func createRecipe(recipe: RecipeModel) async throws -> RecipeModel {
-        // Step 1: Convert PostData to JSON
+        
         let encoder = JSONEncoder()
         let jsonData = try encoder.encode(recipe)
         
-        // Step 2: Create the URL and the URLRequest
         guard let url = URL(string: baseURL) else {
             throw URLError(.badURL)
         }
@@ -116,14 +113,11 @@ class APIClient {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
         
-        // Step 3: Perform the POST request using URLSession
         let (data, response) = try await URLSession.shared.data(for: request)
         
         print(response)
         
-        // Step 4: Handle the response
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 {
-            // Successful response
             let decoder = JSONDecoder()
             let postResponse = try decoder.decode(RecipeModel.self, from: data)
             return postResponse
@@ -181,7 +175,7 @@ class APIClient {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         
         if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
             // Successfully fetched a single recipe

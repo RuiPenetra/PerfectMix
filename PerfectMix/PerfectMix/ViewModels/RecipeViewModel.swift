@@ -39,7 +39,6 @@ import Foundation
             do {
                 if params == "" && value == ""{
                     recipes = try await APIClient.shared.fetchRecipes()
-                    loadSavedRecipes()
                 }else{
                     recipes = try await APIClient.shared.fetchRecipesFilter(params:params, value:value)
 
@@ -118,12 +117,8 @@ import Foundation
         do {
             isLoading = true
             // Attempt to update the recipe
-            try await APIClient.shared.deleteRecipe(by: recipe.id)
-            
-            // Update the selected recipe if needed
-
-            // A helper function to update the recipe in multiple lists
-            
+            let _ = try await APIClient.shared.deleteRecipe(by: recipe.id)
+      
             
             // Update the recipe of the day if it matches
             if recipeOfTheDay?.id == recipe.id {
@@ -201,8 +196,8 @@ import Foundation
            if !savedRecipes.contains(where: { $0.id == recipe.id }) {
                savedRecipes.append(recipe)
                saveToFile()
-               isRecipeSaved = true
-               message = "Recipe has been saved"
+               //isRecipeSaved = true
+               //message = "Recipe has been saved"
            }
         }
        
@@ -210,8 +205,8 @@ import Foundation
            // Remove a receita da lista
            savedRecipes.removeAll(where: { $0.id == recipe.id })
            saveToFile()
-           isRecipeSaved = true
-           message = "Recipe has been removed"
+           //isRecipeSaved = true
+           //message = "Recipe has been removed"
 
            
        }
