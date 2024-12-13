@@ -4,17 +4,26 @@
 
 # PerfectMix
 
-<p align="center">
+<div style="background-color:#FCC06C; padding: 20px; text-align: center;">
   <img src="https://github.com/RuiPenetra/PerfectMix/blob/master/doc/logo.png" alt="Logo">
-</p>
+</div>
 
+<br>
+
+## Descrição
+
+<p>
 A aplicação **PerfectMix** foi desenvolvida no âmbito da unidade curricular de Desenvolvimento para Dispositivos Móveis e tem como objetivo a gestão de receitas culinárias. A aplicação foi criada com base nos requisitos estabelecidos, e, como tal, funcionalidades como a lista de ingredientes e o modo de preparação ainda não foram implementadas, ficando reservadas para desenvolvimentos futuros.
 
+<p>
+
+<br>
 
 <p align="center">
   <img src="https://github.com/RuiPenetra/PerfectMix/blob/master/doc/banner.png" alt="Banner">
 </p>
 
+<br>
 
 
 ## Funcionalidades
@@ -86,13 +95,17 @@ Este guia assume que o projeto inclui uma parte de desenvolvimento para iOS e qu
 
 ## Demonstração
 
+Demonstração prática do funcionamento do projeto. Abaixo, poderá ver o vídeo explicativo:
 
+<p align="center">
+  <video width="500" controls>
+    <source src="https://github.com/RuiPenetra/PerfectMix/blob/master/doc/demo.mp4" type="video/mp4">
+    Desculpe, o seu navegador não suporta este formato de vídeo.
+  </video>
+</p>
 
 ## Licença
 
-Este projeto está licenciado sob a licença [NOME DA LICENÇA] - consulte o ficheiro **LICENSE** para mais detalhes.
+Este projeto está licenciado sob a licença MIT - consulte o ficheiro **LICENSE** para mais detalhes.
 
----
-
-Divirta-se a usar o **PerfectMix** e boas receitas!
 
