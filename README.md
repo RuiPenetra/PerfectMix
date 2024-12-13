@@ -5,14 +5,14 @@
 # PerfectMix
 
 <p align="center">
-  <img src="https://github.com/RuiPenetra/PerfectMix/blob/doc/logo.png" alt="Logo">
+  <img src="https://github.com/RuiPenetra/PerfectMix/blob/master/doc/logo.png" alt="Logo">
 </p>
 
 A aplicação **PerfectMix** foi desenvolvida no âmbito da unidade curricular de Desenvolvimento para Dispositivos Móveis e tem como objetivo a gestão de receitas culinárias. A aplicação foi criada com base nos requisitos estabelecidos, e, como tal, funcionalidades como a lista de ingredientes e o modo de preparação ainda não foram implementadas, ficando reservadas para desenvolvimentos futuros.
 
 
 <p align="center">
-  <img src="https://github.com/RuiPenetra/PerfectMix/blob/doc/lbanner.png" alt="Banner">
+  <img src="https://github.com/RuiPenetra/PerfectMix/blob/master/doc/banner.png" alt="Banner">
 </p>
 
 
