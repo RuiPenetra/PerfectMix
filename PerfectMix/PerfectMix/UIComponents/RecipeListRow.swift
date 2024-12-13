@@ -10,7 +10,7 @@ import SwiftUI
 struct RecipeListRow: View {
     
     @EnvironmentObject var recipeViewModel: RecipeViewModel
-
+        
     let recipe: RecipeModel
     
     var body: some View {
@@ -25,6 +25,7 @@ struct RecipeListRow: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 350,height: 270)
                     .frame(maxWidth:.infinity)
+                    .opacity(0.2)
                     .cornerRadius(8)
                     .overlay{
                         VStack{
@@ -47,12 +48,14 @@ struct RecipeListRow: View {
                                 .buttonStyle(PlainButtonStyle()) // Remove efeitos padrão
                                 .contentShape(Rectangle())      // Aumenta área clicável
                                 .onTapGesture { }
-
-
+                                
+                                
                             }
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding()
+                            
                             Spacer()
+                            
                             ZStack(alignment: .bottom){
                                 VStack(alignment: .leading, spacing: 10){
                                     Text(recipe.category)
@@ -63,13 +66,13 @@ struct RecipeListRow: View {
                                         .background(Color.white.opacity(0.8))
                                         .foregroundColor(Color.black)
                                         .cornerRadius(20)
-                                        
+                                    
                                     Text(recipe.title)
                                         .font(.title3)
                                         .fontWeight(.bold)
                                         .padding(.bottom,3)
                                         .foregroundColor(Color.white)
-                                    RatingBar(rating: .constant(5), maxRating: 5)
+                                    RatingBar(rating: recipe.rating , maxRating: 5)
                                     
                                     HStack{
                                         Image(systemName: "person.fill")
@@ -81,7 +84,7 @@ struct RecipeListRow: View {
                                         Text("\(recipe.portion) persons")
                                             .font(.system(size: 15))
                                             .fontWeight(.light)
-                                            .padding(.leading)
+                                            .padding(.leading,6)
                                             .foregroundColor(Color.white)
                                         
                                         Spacer()
@@ -94,7 +97,7 @@ struct RecipeListRow: View {
                                         Text(recipe.difficulty)
                                             .font(.system(size: 15))
                                             .fontWeight(.light)
-                                            .padding(.leading)
+                                            .padding(.leading,6)
                                             .foregroundColor(Color.white)
                                         Spacer()
                                         Image(systemName: "timer")
@@ -106,9 +109,9 @@ struct RecipeListRow: View {
                                         Text("\(recipe.portion) min")
                                             .font(.system(size: 15))
                                             .fontWeight(.light)
-                                            .padding(.leading)
+                                            .padding(.leading,6)
                                             .foregroundColor(Color.white)
-
+                                        
                                     }
                                     .padding(.top,20)
                                     
@@ -117,24 +120,21 @@ struct RecipeListRow: View {
                                 .frame(maxWidth: .infinity, maxHeight: 185, alignment: .bottom)
                                 .background(Color.black.opacity(0.8))
                                 .cornerRadius(20)
-                                }
+                            }
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-
-                                .padding(5)
-                        }
-                      
-                    
                             
-                            
+                            .padding(5)
                         }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
             }
             .cornerRadius(10)
         }
         .fixedSize(horizontal: false, vertical: true)
         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
-
+        
     }
 }
 

@@ -14,6 +14,7 @@ struct RecipeModel: Identifiable, Decodable, Encodable{
     var description: String
     var portion: Int
     var time: Int
+    var rating: Int
     var difficulty: String
     var category: String
     
@@ -29,6 +30,7 @@ struct RecipeModel: Identifiable, Decodable, Encodable{
          description: String = "",
          portion: Int = 1,
          time: Int = 1,
+         rating: Int = 0,
          difficulty: String = "",
          category: String = ""
      ) {
@@ -37,13 +39,14 @@ struct RecipeModel: Identifiable, Decodable, Encodable{
          self.description = description
          self.portion = portion
          self.time = time
+         self.rating = 0
          self.difficulty = difficulty
          self.category = category
      }
     
 
     func updateCompletion() -> RecipeModel{
-        return RecipeModel(id: id, title: title, description: description, portion: portion, time: time, difficulty: difficulty, category: category)
+        return RecipeModel(id: id, title: title, description: description, portion: portion, time: time, rating: rating, difficulty: difficulty, category: category)
     }
     
     func generateSingleMockRecipe() -> RecipeModel {
@@ -53,6 +56,7 @@ struct RecipeModel: Identifiable, Decodable, Encodable{
             description: "Classic Italian pasta with eggs, cheese, pancetta, and pepper.",
             portion: 2,
             time: 10,
+            rating: 4,
             difficulty: "Easy",
             category: "Italian"
         )

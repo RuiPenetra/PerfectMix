@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RatingBar: View {
-    @Binding var rating: Int  // Binding variable to update the rating
+    @State var rating: Int  // Binding variable to update the rating
     let maxRating: Int       // Maximum number of stars (e.g., 5 stars)
     
     var body: some View {
@@ -28,7 +28,7 @@ struct RatingBar: View {
 
 struct RatingBar_Previews: PreviewProvider {
     static var previews: some View {
-        RatingBar(rating: .constant(3), maxRating: 5)
+        RatingBar(rating: 3, maxRating: 5)
             .previewLayout(.sizeThatFits)
             .padding()
     }

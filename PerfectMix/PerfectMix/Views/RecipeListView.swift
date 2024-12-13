@@ -14,12 +14,32 @@ struct RecipeListView: View {
     @State private var showDetails: Bool = false
 
     var body: some View {
-        
-       VStack {
-           RecipeList()
-       }
-       .navigationTitle("My Recipes")
-       
+        NavigationView {
+            ZStack{
+                RecipeList()
+                    .onAppear {
+                        recipeViewModel.getRecipes(params: "", value: "")
+                    }
+                    .toast(isPresented: $recipeViewModel.isRecipeSaved, message: recipeViewModel.message)
+
+            }
+            .navigationTitle("My Recipes")
+             .fullScreenCover(isPresented: $recipeViewModel.showDetails) {
+                 RecipeDetailsView(isShowDetails: $recipeViewModel.showDetails)  // Show Recipe Details on tap
+             }
+             .toolbar {
+                 ToolbarItem(placement: .navigationBarTrailing) {
+                     Button {
+                         recipeViewModel.openEditRecipe.toggle()
+                         
+                     } label: {
+                         Image(systemName: "plus")
+                     }
+                 }
+                 
+             }
+        }
+
     }
     
 

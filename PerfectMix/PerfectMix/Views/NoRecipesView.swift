@@ -12,17 +12,26 @@ struct NoRecipesView: View {
     @State var animate: Bool = false
     
     var body: some View {
-        ScrollView{
+        
             VStack(spacing:10) {
-                Text("There are no recipes")
-                    .font(.title)
-                    .fontWeight(.semibold)
                 
-                Text("I think you should fuck off")
+                Image("no-recipes")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame( height: 160)
+                                    
+                
+                Text("No recipes")
+                    .font(.headline)
+                    .foregroundColor(Color.black.opacity(0.6))
+                    
+                
+                /*
+                Text("Create a new recipe")
                     .padding(.bottom,20)
                 
-                NavigationLink(destination: NewRecipeView(), label: {
-                    Text("Add .l. ")
+                NavigationLink(destination: NewRecipeView(recipe: RecipeModel(difficulty: "Easy", category: "Italian")), label: {
+                    Text("Add")
                         .foregroundColor(.white)
                         .font(.headline)
                         .frame(height: 55)
@@ -40,18 +49,16 @@ struct NoRecipesView: View {
                     )
                     .scaleEffect(animate ? 1.1 : 1.0)
                     .offset(y: animate ? -7 : 0)
-                
+                */
             }
+            .frame(maxHeight:.infinity)
             .multilineTextAlignment(.center)
-            .padding(40)
-            .onAppear(perform: addAnimation)
-            
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+            /*.onAppear(perform: addAnimation)*/
+         
     }
     
     
-    func addAnimation(){
+    /*func addAnimation(){
         guard !animate else {return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
             withAnimation(
@@ -63,14 +70,12 @@ struct NoRecipesView: View {
             }
         }
     }
+     */
     
 }
 
 struct NoRecipesView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
-            NoRecipesView()
-            .navigationTitle("Title")
-        }
+        NoRecipesView()
     }
 }

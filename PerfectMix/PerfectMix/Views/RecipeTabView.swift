@@ -13,25 +13,25 @@ struct RecipeTabView: View {
 
     var body: some View {
             TabView {
-                HomeView()
-                    .navigationTitle("Ola")
-                .tabItem{
-                    Image(systemName: "house")
-                    Text("House")
-                }
                 
-                MyRecipesView()
-                .environmentObject(recipeViewModel)
-                .tabItem{
-                    Image(systemName: "book")
-                    Text("My Recipes")
-                }
+                HomeView()
+                    .environmentObject(recipeViewModel)
+                    .tabItem{
+                        Image(systemName: "house")
+                        Text("Home")
+                    }
+                
+                RecipeListView()
+                    .tabItem{
+                        Image(systemName: "book")
+                        Text("My Recipes")
+                    }
                 
                 RecipesSavedView()
-                .tabItem{
-                    Image(systemName: "bookmark")
-                    Text("Saved")
-                }
+                    .tabItem{
+                        Image(systemName: "bookmark")
+                        Text("Saved")
+                    }
             }
         
     }

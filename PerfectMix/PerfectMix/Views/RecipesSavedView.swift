@@ -10,15 +10,18 @@ import SwiftUI
 struct RecipesSavedView: View {
     
     @EnvironmentObject var recipeViewModel: RecipeViewModel
+    @State private var showDetails = false
     
     var body: some View {
         NavigationView{
             ZStack{
-                if !recipeViewModel.isLoading && recipeViewModel.recipes.isEmpty  {
+                if !recipeViewModel.isLoading && recipeViewModel.savedRecipes.isEmpty  {
                     NoRecipesView()
                         .transition(AnyTransition.opacity.animation(.easeIn))
                 }
-                
+                if recipeViewModel.isLoading {
+                    LoadingView()
+                }
                 List{
                     ForEach(Array(recipeViewModel.savedRecipes.enumerated()), id: \.element.id) { index, recipe in
                         RecipeListRow(recipe: recipe)
@@ -31,25 +34,19 @@ struct RecipesSavedView: View {
                                 }
                             }
                     }
-                    //.onDelete(perform: recipeViewModel.deleteItem)
-                    //.onMove(perform: recipeViewModel.moveItem)
                 }
                 .listStyle(.plain)
                 .padding(EdgeInsets(top: 44, leading: 0, bottom: 24, trailing: 0))
                 .edgesIgnoringSafeArea(.all)
-                //.task{
-                //  recipeViewModel.getRecipes(params:params , value: value)
-                
-                //}
-                .sheet(isPresented: $recipeViewModel.showDetails){
-                    RecipeDetailsView()
+                .fullScreenCover(isPresented: $showDetails){
+                    RecipeDetailsView(isShowDetails: $showDetails)
                 }
-                
-                if recipeViewModel.isLoading {
-                    LoadingView()
-                }
+                .toast(isPresented: $recipeViewModel.isRecipeSaved, message: recipeViewModel.message)
+
+
             }
             .navigationTitle("Saved")
+    
         }
         
         

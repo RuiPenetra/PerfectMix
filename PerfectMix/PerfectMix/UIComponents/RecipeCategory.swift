@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeCategory: View {
     
-    @Binding var category: String
+    var category: String
     
     var body: some View {
         Image("\(category.lowercased())-recipes")
@@ -17,8 +17,16 @@ struct RecipeCategory: View {
             .aspectRatio(contentMode: .fit)
             .frame(maxWidth:.infinity)
             .overlay(
-              
+                ZStack{
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.clear, Color.black, Color.black]),
+                        startPoint: .top,
+                        endPoint: .bottom)
+                        .opacity(0.8)
+                        .blur(radius: 3)
+                
                 VStack{
+                    
                     Spacer(minLength: 60)
                     Text(category)
                         .font(.system(size: 16))
@@ -28,23 +36,21 @@ struct RecipeCategory: View {
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.black.opacity(0.7))
                 .foregroundColor(Color.white)
 
                             
-
+                }
                 
             )
             .frame(width:100, height: 100)
             .foregroundColor(Color.black)
             .cornerRadius(20)
-            .shadow(radius: 14)
     }
 }
 
 struct RecipeCategory_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeCategory(category: .constant("Italian"))
+        RecipeCategory(category: "Italian")
             .previewLayout(.sizeThatFits)
             .padding()
     }

@@ -57,10 +57,18 @@ class APIClient {
 
         }
 
-
-        let (data, _) = try await URLSession.shared.data(from: url)
+          var request = URLRequest(url: url)
+          request.setValue("application/json", forHTTPHeaderField: "Accept")
+          
+        let (data, response) = try await URLSession.shared.data(from: url)
         
         do{
+            // Check if the response is a 404 error
+              if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 404 {
+                  // Return an empty array if 404 Not Found
+                  return []
+              }
+            
             let decoder = JSONDecoder()
             let recipes = try decoder.decode([RecipeModel].self, from: data)
             return recipes
@@ -119,6 +127,65 @@ class APIClient {
             let decoder = JSONDecoder()
             let postResponse = try decoder.decode(RecipeModel.self, from: data)
             return postResponse
+        } else {
+            throw URLError(.badServerResponse)
+        }
+    }
+    
+    
+    func updateRecipe(recipe: RecipeModel) async throws -> RecipeModel {
+        
+        guard !recipe.id.isEmpty else {
+            throw URLError(.badURL)
+        }
+        
+        let encoder = JSONEncoder()
+        let jsonData = try encoder.encode(recipe)
+        
+        let urlString = "\(baseURL)/\(recipe.id)"
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse {
+            switch httpResponse.statusCode {
+            case 200, 204:
+                if httpResponse.statusCode == 200 {
+                    let decoder = JSONDecoder()
+                    let updatedRecipe = try decoder.decode(RecipeModel.self, from: data)
+                    return updatedRecipe
+                } else {
+                    return recipe
+                }
+            default:
+                throw URLError(.badServerResponse)
+            }
+        } else {
+            throw URLError(.badServerResponse)
+        }
+    }
+
+    
+    func deleteRecipe(by id: String) async throws -> Bool {
+        guard let url = URL(string: "\(baseURL)/\(id)") else {
+            throw URLError(.badURL)
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+            // Successfully fetched a single recipe
+            return true
         } else {
             throw URLError(.badServerResponse)
         }

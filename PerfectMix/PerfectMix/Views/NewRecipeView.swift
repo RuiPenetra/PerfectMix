@@ -8,33 +8,31 @@
 import SwiftUI
 struct NewRecipeView: View {
     @EnvironmentObject var recipeViewModel: RecipeViewModel
-    @State private var recipe: RecipeModel = RecipeModel(difficulty: "Easy", category: "Italian")
+    @State var recipe: RecipeModel
     @Namespace var animation
     @State private var showAlert: Bool = false
     @State private var showValidationAlert: Bool = false
 
-        let categories: [String] = ["Italian", "Chinese", "Indian", "Mexican", "Mediterranean", "French"]
-        
-        private func getAlert() -> Alert {
-            return Alert(
-                title: Text("Saved!"),
-                message: Text("Your recipe has been saved."),
-                dismissButton: .default(Text("OK")) {
-                    recipeViewModel.openEditRecipe.toggle()
-                })
-        }
-        
-        private func getValidationAlert() -> Alert {
-            return Alert(
-                title: Text("Validation Error"),
-                message: Text("Please fill in all fields."),
-                dismissButton: .default(Text("OK")) {
-                    showAlert.toggle()
-                })
-            
-        }
-    
-    
+    let categories: [String] = ["Italian", "Chinese", "Indian", "Mexican", "Mediterranean", "French"]
+
+    private func getAlert() -> Alert {
+        return Alert(
+            title: Text("Saved!"),
+            message: Text("Your recipe has been \(recipe.id.isEmpty ? "Created" : "Updated")."),
+            dismissButton: .default(Text("OK")) {
+                recipeViewModel.openEditRecipe.toggle()
+            })
+    }
+
+    private func getValidationAlert() -> Alert {
+        return Alert(
+            title: Text("Validation Error"),
+            message: Text("Please fill in all fields."),
+            dismissButton: .default(Text("OK")) {
+                showAlert.toggle()
+            })
+    }
+
     // Validation function
     private func validateFields() -> Bool {
         return !recipe.title.isEmpty &&
@@ -47,14 +45,13 @@ struct NewRecipeView: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            
-            // Placing Text at the top
             Text("\(recipeViewModel.selectedRecipe == nil ? "New" : "Edit") Recipe")
                 .font(.title3.bold())
                 .frame(maxWidth: .infinity)
                 .overlay(alignment: .leading) {
                     Button {
                         recipeViewModel.openEditRecipe.toggle()
+    
                     } label: {
                         Image(systemName: "arrow.left")
                             .font(.title3)
@@ -213,7 +210,13 @@ struct NewRecipeView: View {
                 Button {
                     if validateFields() {
                        Task {
-                           let response = await recipeViewModel.createRecipe(recipe: recipe)
+                           var response: Bool = false
+                           if (recipe.id.isEmpty){
+                               response = await recipeViewModel.createRecipe(recipe: recipe)
+                           }else{
+                               response = await recipeViewModel.updateRecipe(recipe: recipe)
+                           }
+                           
                            if response{
                                showAlert = true
                            }
@@ -257,11 +260,11 @@ struct NewRecipeView: View {
     }
 }
 
-
-
-
 struct NewRecipeView_Previews: PreviewProvider {
+    @State static var previewRecipe = RecipeModel(difficulty: "Easy", category: "Italian")
+
     static var previews: some View {
-        NewRecipeView()
+        NewRecipeView(recipe: previewRecipe)
+            .environmentObject(RecipeViewModel())
     }
 }
