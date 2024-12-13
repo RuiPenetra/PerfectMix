@@ -97,12 +97,10 @@ Este guia assume que o projeto inclui uma parte de desenvolvimento para iOS e qu
 
 Demonstração prática do funcionamento do projeto. Abaixo, poderá ver o vídeo explicativo:
 
-<p align="center">
-  <video width="500" controls>
-    <source src="https://github.com/RuiPenetra/PerfectMix/blob/master/doc/demo.mp4" type="video/mp4">
-    Desculpe, o seu navegador não suporta este formato de vídeo.
-  </video>
-</p>
+
+[![Demo](https://img.youtube.com/vi/oxgpi75OShE/0.jpg)](https://www.youtube.com/watch?v=oxgpi75OShE)
+
+
 
 ## Licença
 
