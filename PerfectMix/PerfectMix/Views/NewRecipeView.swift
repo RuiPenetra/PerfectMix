@@ -29,7 +29,6 @@ struct NewRecipeView: View {
             title: Text("Validation Error"),
             message: Text("Please fill in all fields."),
             dismissButton: .default(Text("OK")) {
-                showAlert.toggle()
             })
     }
 
@@ -179,7 +178,7 @@ struct NewRecipeView: View {
                     
                     Text("Category")
                         .font(.system(size: 16))
-                }
+               }
                 .foregroundColor(.gray)
 
                 ScrollView(.horizontal, showsIndicators: false) {
